@@ -1,0 +1,77 @@
+﻿@model IEnumerable<SampleCore.Entity.Data>
+@{
+    Layout = null;
+}
+<style>
+    body {background-color: #90EE90;}
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+#customers td, #customers th {
+  border: 1px solid black;
+  padding: 8px;
+}
+</style>
+<h1>Read</h1>
+<table id="customers" class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(x => x.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => x.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => x.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => x.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => x.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x=>x.Password)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+     {
+        <tr>
+            <td>
+                @item.FirstName
+            </td>
+            <td>
+                @item.LastName
+            </td>
+            <td>
+                @item.Email
+            </td>
+            <td>
+                @item.Address
+            </td>
+            <td>
+                @item.Phone
+            </td>
+            <td>
+                @item.Password
+            </td>
+            <td>
+                @*@Html.ActionLink("Update","Update","Home", new{id =item.Id})*@
+                <input type="button" value="Update" onclick="location.href='@Url.Action("Update", "Home",new{id =item.Id})'" />
+            </td>        
+            <td>
+            @*@Html.ActionLink("Delete","Delete","Home",new{id =item.Id})*@
+            <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Are you sure want to delete this record?')">
+                        @Html.ActionLink("delete", "Delete", new {id =item.Id})
+                        </button>
+            </td>
+        </tr>            
+    }
+    <p>
+        @*@Html.ActionLink("Create","Adding","Home")*@
+        <input type="button" value="Create" onclick="location.href='@Url.Action("Adding", "Home")'" />
+    </p>
+    </table>
